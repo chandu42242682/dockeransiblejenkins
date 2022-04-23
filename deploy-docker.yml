@@ -5,10 +5,10 @@
   tasks:
 
   - name: Install aptitude
-     apt:
-        name: aptitude
-        state: latest
-        update_cache: true
+    apt:
+      name: aptitude
+      state: latest
+      update_cache: true
 
   - name: Install required system packages
     apt:
