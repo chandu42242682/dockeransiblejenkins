@@ -7,17 +7,17 @@
   - name: installing python pip
     apt:
       name: python-pip
-      state: present
+      state: absent
 
   - name: installing docker 
     apt:
       name: docker.io
-      state: present
+      state: absent
 
   - name: isnatall pythone pip module
     pip:
       name: docker-py3
-      state: present
+      state: absent
 
   - name: starting the container
     docker_container:
