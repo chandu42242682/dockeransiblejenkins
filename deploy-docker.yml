@@ -5,7 +5,7 @@
   tasks:
 
   - name: Install aptitude
-      apt:
+     apt:
         name: aptitude
         state: latest
         update_cache: true
