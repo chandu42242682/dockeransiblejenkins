@@ -4,20 +4,44 @@
   become: true
   tasks:
 
-  - name: installing python pip
-    apt:
-      name: python-pip
-      state: absent
+  - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
 
-  - name: installing docker 
+  - name: Install required system packages
     apt:
-      name: docker.io
-      state: absent
+      pkg:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+        - python3-pip
+        - virtualenv
+        - python3-setuptools
+      state: latest
+      update_cache: true
 
-  - name: isnatall pythone pip module
+  - name: Add Docker GPG apt Key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
+
+  - name: Update apt and install docker-ce
+    apt:
+      name: docker-ce
+      state: latest
+      update_cache: true
+
+  - name: Install Docker Module for Python
     pip:
-      name: docker-py3
-      state: absent
+      name: docker
 
   - name: starting the container
     docker_container:
@@ -26,4 +50,3 @@
       state: started
       published_ports:
           - 0.0.0.0:8080:8080
-
