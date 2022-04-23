@@ -14,12 +14,6 @@
       name: docker.io
       state: present
 
-  - name: start docker
-    service:
-      name: docker.io
-      state: started
-      enabled: yes
-
   - name: isnatall pythone pip module
     pip:
       name: docker-py3
