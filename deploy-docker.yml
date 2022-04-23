@@ -1,28 +1,34 @@
 ---
+
 - hosts: dev
-  become: True
+  become: true
   tasks:
-    - name: Install python pip
-      yum:
-        name: python-pip
-        state: present
-    - name: Install docker
-      yum:
-        name: docker
-        state: present
-    - name: start docker
-      service:
-        name: docker
-        state: started
-        enabled: yes
-    - name: Install docker-py python module
-      pip:
-        name: docker-py
-        state: present
-    - name: Start the container
-      docker_container:
-        name: hariapp
-        image: "kammana/hariapp:{{DOCKER_TAG}}"
-        state: started
-        published_ports:
+
+  - name: installing python pip
+    apt:
+      name: python-pip
+      state: present
+
+  - name: installing docker 
+    apt:
+      name: docker
+      state: present
+
+  - name: start docker
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: isnatall pythone pip module
+    pip:
+      name: docker-py
+      state: present
+
+  - name: starting the container
+    docker_container:
+      name: myapp
+      image: "chandra78422/myapp:${DOCKER_TAG}"
+      state: started
+      published_ports:
           - 0.0.0.0:8080:8080
