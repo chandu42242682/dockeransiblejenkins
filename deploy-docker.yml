@@ -4,6 +4,12 @@
   become: true
   tasks:
 
+  - name: Install DOCKER
+    apt:
+      name: docker
+      state: latest
+      update_cache: true
+  
   - name: Install aptitude
     apt:
       name: aptitude
